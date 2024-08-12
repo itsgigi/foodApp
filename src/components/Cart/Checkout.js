@@ -2,22 +2,25 @@ import { useRef, useState } from "react";
 import classes from "./Checkout.module.css";
 
 const isEmpty = (value) => value.trim() === "";
-const isNot5Char = (value) => value.trim().length !== 5;
+//const isNot5Char = (value) => value.trim().length !== 5;
 
 const Checkout = (props) => {
   const [formInputValidity, setFormInputValidity] = useState({
     name: true,
     roomNumber: true,
+    notes: false
   });
 
   const nameInputRef = useRef();
   const roomNumberInputRef = useRef();
+  const notesInputRef = useRef();
 
   const confirmHandler = (event) => {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
     const enteredRoomNumber = roomNumberInputRef.current.value;
+    const enteredNotes = notesInputRef.current.value;
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredRoomNumberIsValid = !isEmpty(enteredRoomNumber);
@@ -38,6 +41,7 @@ const Checkout = (props) => {
     props.onSubmit({
       name: enteredName,
       roomNumber: enteredRoomNumber,
+      notes: enteredNotes
     });
   };
 
@@ -52,14 +56,18 @@ const Checkout = (props) => {
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
       <div className={nameControlClasses}>
-        <label htmlFor="name">Cognome</label>
+        <label htmlFor="name">*Cognome</label>
         <input type="text" id="name" ref={nameInputRef} />
         {!formInputValidity.name && <p>Per favore inserisci un nome valido!</p>}
       </div>
       <div className={roomNumberControlClasses}>
-        <label htmlFor="street">Numero di camera</label>
-        <input type="text" id="street" ref={roomNumberInputRef} />
+        <label htmlFor="roomNumber">*Numero di camera</label>
+        <input type="text" id="roomNumber" ref={roomNumberInputRef} />
         {!formInputValidity.street && <p>Per favore inserisci un numero valido!</p>}
+      </div>
+      <div className={classes.control}>
+        <label htmlFor="notes">Note</label>
+        <input type="text" id="notes" ref={notesInputRef}/>
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
