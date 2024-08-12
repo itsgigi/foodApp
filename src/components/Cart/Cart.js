@@ -13,7 +13,7 @@ const Cart = (props) => {
 
   const cartContext = useContext(CartContext);
 
-  const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
+  const totalAmount = `€${cartContext.totalAmount.toFixed(2)}`;
   const hasItems = cartContext.items.length > 0;
 
   const cartItemRemoveHadler = (id) => {
@@ -62,11 +62,11 @@ const Cart = (props) => {
   const modalActions = (
     <div className={classes.actions}>
       <button className={classes["button--alt"]} onClick={props.onClose}>
-        Close
+        Chiudi
       </button>
       {hasItems && (
         <button className={classes.button} onClick={orderHandler}>
-          Order
+          Procedi
         </button>
       )}
     </div>
@@ -76,7 +76,7 @@ const Cart = (props) => {
     <Fragment>
       {cartItems}
       <div className={classes.total}>
-        <span>Total Amount</span>
+        <span>Totale</span>
         <span>{totalAmount}</span>
       </div>
       {isCheckout && (
@@ -86,14 +86,14 @@ const Cart = (props) => {
     </Fragment>
   );
 
-  const isSubmitingModalContent = <p>Sending order data...</p>;
+  const isSubmitingModalContent = <p>Invio ordine...</p>;
 
   const submitedModalContent = (
     <Fragment>
-      <p>Successfully sent the order</p>
+      <p>Ordine inviato correttamente</p>
       <div className={classes.actions}>
         <button className={classes.button} onClick={props.onClose}>
-          Close
+          Chiudi
         </button>
       </div>
     </Fragment>

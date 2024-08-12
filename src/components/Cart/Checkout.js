@@ -7,41 +7,29 @@ const isNot5Char = (value) => value.trim().length !== 5;
 const Checkout = (props) => {
   const [formInputValidity, setFormInputValidity] = useState({
     name: true,
-    street: true,
-    city: true,
-    postalCode: true,
+    roomNumber: true,
   });
 
   const nameInputRef = useRef();
-  const streetInputRef = useRef();
-  const postaCodelInputRef = useRef();
-  const cityInputRef = useRef();
+  const roomNumberInputRef = useRef();
 
   const confirmHandler = (event) => {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
-    const enteredStreet = streetInputRef.current.value;
-    const enteredPostalCode = postaCodelInputRef.current.value;
-    const enteredCity = cityInputRef.current.value;
+    const enteredRoomNumber = roomNumberInputRef.current.value;
 
     const enteredNameIsValid = !isEmpty(enteredName);
-    const enteredStreetIsValid = !isEmpty(enteredStreet);
-    const enteredPostalCodeIsValid = !isNot5Char(enteredPostalCode);
-    const enteredCityIsValid = !isEmpty(enteredCity);
+    const enteredRoomNumberIsValid = !isEmpty(enteredRoomNumber);
 
     setFormInputValidity({
       name: enteredNameIsValid,
-      street: enteredStreetIsValid,
-      city: enteredPostalCodeIsValid,
-      postalCode: enteredCityIsValid,
+      roomNumber: enteredRoomNumberIsValid,
     });
 
     const formIsValid =
       enteredNameIsValid &&
-      enteredStreetIsValid &&
-      enteredPostalCodeIsValid &&
-      enteredCityIsValid;
+      enteredRoomNumberIsValid
 
     if (!formIsValid) {
       return;
@@ -49,9 +37,7 @@ const Checkout = (props) => {
     //submit the cart data
     props.onSubmit({
       name: enteredName,
-      street: enteredStreet,
-      postalCode: enteredPostalCode,
-      city: enteredCity,
+      roomNumber: enteredRoomNumber,
     });
   };
 
@@ -59,45 +45,27 @@ const Checkout = (props) => {
   const nameControlClasses = `${classes.control} ${
     formInputValidity.name ? "" : classes.invalid
   }`;
-  const streetControlClasses = `${classes.control} ${
+  const roomNumberControlClasses = `${classes.control} ${
     formInputValidity.street ? "" : classes.invalid
-  }`;
-  const postaCodeControlClasses = `${classes.control} ${
-    formInputValidity.postalCode ? "" : classes.invalid
-  }`;
-  const cityControlClasses = `${classes.control} ${
-    formInputValidity.city ? "" : classes.invalid
   }`;
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
       <div className={nameControlClasses}>
-        <label htmlFor="name">Your Name</label>
+        <label htmlFor="name">Cognome</label>
         <input type="text" id="name" ref={nameInputRef} />
-        {!formInputValidity.name && <p>Please enter a valid name!</p>}
+        {!formInputValidity.name && <p>Per favore inserisci un nome valido!</p>}
       </div>
-      <div className={streetControlClasses}>
-        <label htmlFor="street">Street</label>
-        <input type="text" id="street" ref={streetInputRef} />
-        {!formInputValidity.street && <p>Please enter a valid street!</p>}
-      </div>
-      <div className={postaCodeControlClasses}>
-        <label htmlFor="postal">Postal Code</label>
-        <input type="text" id="postal" ref={postaCodelInputRef} />
-        {!formInputValidity.postalCode && (
-          <p>Please enter a valid postal code (5 characters long)</p>
-        )}
-      </div>
-      <div className={cityControlClasses}>
-        <label htmlFor="city">City</label>
-        <input type="text" id="city" ref={cityInputRef} />
-        {!formInputValidity.city && <p>Please enter a valid city!</p>}
+      <div className={roomNumberControlClasses}>
+        <label htmlFor="street">Numero di camera</label>
+        <input type="text" id="street" ref={roomNumberInputRef} />
+        {!formInputValidity.street && <p>Per favore inserisci un numero valido!</p>}
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
-          Cancel
+          Annulla
         </button>
-        <button className={classes.submit}>Confirm</button>
+        <button className={classes.submit}>Invia</button>
       </div>
     </form>
   );

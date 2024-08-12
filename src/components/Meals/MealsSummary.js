@@ -3,14 +3,11 @@ import classes from './MealsSummary.module.css';
 const MealsSummary = () => {
   return (
     <section className={classes.summary}>
-      <h2>Delicious Food, Delivered To You</h2>
+      <h2>Ordina comodamente, Al resto ci pensiamo noi!</h2>
       <p>
-        Choose your favorite meal from our broad selection of available meals
-        and enjoy a delicious lunch or dinner at home.
-      </p>
-      <p>
-        All our meals are cooked with high-quality ingredients, just-in-time and
-        of course by experienced chefs!
+        Scegli tra cibi e bevende disponibili per il servizio in piscina,
+        appena disponibili te le porteremo noi e potrai scegliere se pagare
+        o addebbitare in stanza.
       </p>
     </section>
   );

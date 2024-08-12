@@ -4,6 +4,7 @@ import classes from "./AvailableMeals.module.css";
 
 import DUMMY_MEALS from "./dummy-meals";
 import MealItem from "./MealItem/MealItem";
+import DUMMY_DRINKS from "./dummy-drinks";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
@@ -20,7 +21,7 @@ const AvailableMeals = () => {
 
       const data = await responce.json();
 
-      console.log(data);
+      console.log('data', data);
 
       const loadedMeals = [];
 
@@ -67,10 +68,26 @@ const AvailableMeals = () => {
       price={meal.price}
     />
   ));
+
+  const drinkList = DUMMY_DRINKS.map((meal) => (
+    <MealItem
+      key={meal.id}
+      id={meal.id}
+      name={meal.name}
+      description={meal.description}
+      price={meal.price}
+    />
+  ));
+
   return (
     <section className={classes.meals}>
+      <h2>Cibo</h2>
       <Card>
         <ul>{mealsList}</ul>
+      </Card>
+      <h2>Bevande</h2>
+      <Card>
+        <ul>{drinkList}</ul>
       </Card>
     </section>
   );
